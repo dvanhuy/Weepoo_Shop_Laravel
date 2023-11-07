@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\ForgotPassRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
@@ -70,5 +71,20 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect()->route('welcome');
+    }
+
+
+    public function getFormForgotpass()
+    {
+        return view('Auth.forgotPassword');
+    }
+
+    public function sendMailResetPass(ForgotPassRequest $request){
+        $user_email = $request->validated();
+        $user = User::where('email',$user_email) -> first();
+        if($user->email_verified_at){
+            return redirect()->route('welcome');
+        };
+        return redirect()->back()->with('fail','Email chưa được xác nhận');
     }
 }

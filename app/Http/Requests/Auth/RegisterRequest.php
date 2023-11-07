@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'namereg' => ['required','max:255','min:5'],
-            'emailreg' => ['required','max:255','min:5','email'],
+            'emailreg' => ['required','max:255','min:5','email','unique:users,email'],
             'passwordreg' => ['required','min:5'],
         ];
     }
@@ -39,6 +39,7 @@ class RegisterRequest extends FormRequest
             'emailreg.max' => 'Email quá dài',
             'emailreg.email' => 'Email phải có chứa dấu @',
             'emailreg.min' => 'Email phải dài hơn 5 kí tự',
+            'emailreg.unique' => 'Email đã tồn tại',
             'passwordreg.required' => 'Bạn chưa điền mật khẩu',
             'passwordreg.min' => 'Mật khẩu phải dài hơn 5 kí tự',
         ];

@@ -44,7 +44,7 @@
                 @enderror
                 <button>Đăng kí</button>
                 @if(Session::has('fail'))
-                    <div class="error" style="margin-top: 10px; font-size: 13px;">{{ session::get('failreg') }}</div>
+                    <div class="error" style="margin-top: 10px; font-size: 13px;">{{ session('failreg') }}</div>
                 @endif
             </form>
         </div>
@@ -59,7 +59,7 @@
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a> -->
                 </div>
                 <span>hoặc đăng nhập tài khoản của bạn ở dưới</span>
-                <input type="text" name="email" placeholder="Email" value="{{ session::get('emailfill') }}">
+                <input type="text" name="email" placeholder="Email" value="{{ session('emailfill') }}">
                 @error('email')
                     <div class="error">{{ $message }}</div>
                 @enderror
@@ -67,10 +67,10 @@
                 @error('password')
                     <div class="error">{{ $message }}</div>
                 @enderror
-                <a href="#">Quên mật khẩu?</a>
+                <a href="{{ route('get_form_fgpassword') }}">Quên mật khẩu?</a>
                 <button>Đăng nhập</button>
                 @if(Session::has('fail'))
-                    <div class="error" style="margin-top: 10px; font-size: 13px;">{{ session::get('fail') }}</div>
+                    <div class="error" style="margin-top: 10px; font-size: 13px;">{{ session('fail') }}</div>
                 @endif
             </form>
         </div>

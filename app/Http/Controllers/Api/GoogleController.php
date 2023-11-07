@@ -32,9 +32,12 @@ class GoogleController extends Controller
                 'name' => $googleUser->name,
                 'social_id'=> $googleUser->id,
                 'social_type' => 'google',
+                'email_verified_at'=> now(),
                 'password' => bcrypt($googleUser->id),
                 'avatar' => $googleUser->avatar,
             ];
+
+            // dd($userinfor);
 
             $user = User::create($userinfor);
             if ($user) {

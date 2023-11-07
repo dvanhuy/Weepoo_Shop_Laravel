@@ -21,18 +21,28 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('login', [AuthController::class,'getFormLogin'])->name('get_form_login');
-Route::post('login', [AuthController::class,'login'])->name('login');
 
-Route::get('register', [AuthController::class,'getFormRegister'])->name('get_form_register');
-Route::post('register', [AuthController::class,'register'])->name('register');
+Route::group(["prefix"=> "login"], function () {
+    Route::get('', [AuthController::class,'getFormLogin'])->name('get_form_login');
+    Route::post('', [AuthController::class,'login'])->name('login');
+});
 
-Route::get('/api/google', [GoogleController::class, 'callApiGoogle'])->name("login_with_google");
-Route::get('/api/google/callback', [GoogleController::class, 'loginGoogleCallback']);
+Route::group(["prefix"=> "register"], function () {
+    Route::get('', [AuthController::class,'getFormRegister'])->name('get_form_register');
+    Route::post('', [AuthController::class,'register'])->name('register');
+});
 
-Route::get('/api/facebook', [FacebookController::class, 'callApiFacebook'])->name("login_with_facebook");
-Route::get('/api/facebook/callback', [FacebookController::class, 'loginFacebookCallback']);
+Route::group(["prefix"=> "forgot-password"], function () {
+    Route::get('', [AuthController::class, 'getFormForgotpass'])->name("get_form_fgpassword");
+    Route::post('', [AuthController::class, 'sendMailResetPass'])->name("fgpassword");
+});
 
+Route::group(["prefix"=> "api"], function () {
+    Route::get('/google', [GoogleController::class, 'callApiGoogle'])->name("login_with_google");
+    Route::get('/google/callback', [GoogleController::class, 'loginGoogleCallback']);
+    Route::get('/facebook', [FacebookController::class, 'callApiFacebook'])->name("login_with_facebook");
+    Route::get('/facebook/callback', [FacebookController::class, 'loginFacebookCallback']);
+});
 
 Route::group(['middleware'=>'userLogin'],function (){
     Route::get('logout', [AuthController::class,'logout'])->name('logout'); 
