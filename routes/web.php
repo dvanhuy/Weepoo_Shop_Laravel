@@ -35,6 +35,8 @@ Route::group(["prefix"=> "register"], function () {
 Route::group(["prefix"=> "forgot-password"], function () {
     Route::get('', [AuthController::class, 'getFormForgotpass'])->name("get_form_fgpassword");
     Route::post('', [AuthController::class, 'sendMailResetPass'])->name("fgpassword");
+    Route::get("/password/reset", [AuthController::class,"getFormResetPassword"])->name("get_form_reset_pass");
+    Route::put("/password/reset", [AuthController::class,"resetpassword"])->name("reset_password");
 });
 
 Route::group(["prefix"=> "api"], function () {

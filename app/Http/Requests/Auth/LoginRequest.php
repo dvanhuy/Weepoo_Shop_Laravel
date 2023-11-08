@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required','max:255','min:5','email'],
+            'email' => ['required','max:255','min:5','email','exists:users,email'],
             'password' => ['required','min:5'],
         ];
     }
@@ -36,6 +36,7 @@ class LoginRequest extends FormRequest
             'email.max' => 'Email quá dài',
             'email.email' => 'Email phải có chứa dấu @',
             'email.min' => 'Email phải dài hơn 5 kí tự',
+            'email.exists' => 'Email không tồn tại',
             'password.required' => 'Bạn chưa điền mật khẩu',
             'password.min' => 'Mật khẩu phải dài hơn 5 kí tự',
         ];

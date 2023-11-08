@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\ForgotPassRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
@@ -82,9 +87,36 @@ class AuthController extends Controller
     public function sendMailResetPass(ForgotPassRequest $request){
         $user_email = $request->validated();
         $user = User::where('email',$user_email) -> first();
-        if($user->email_verified_at){
-            return redirect()->route('welcome');
+        if(!$user->email_verified_at){
+            //email chưa được xác nhận
+            return redirect()->back()->with('fail','Email chưa được xác nhận');
         };
-        return redirect()->back()->with('fail','Email chưa được xác nhận');
+        $token = Password::broker()->createToken($user);
+        $user->sendPasswordResetNotification($token);
+        return redirect()->back()->with('fail','Đã gửi');
+    }
+
+    public function getFormResetPassword(Request $request)
+    {
+        
+        return view('Auth.resetPassword',['token'=> $request->token,'emailfill'=> $request->email]);
+    }
+
+    public function resetpassword(PasswordResetRequest $request)
+    {
+        $passwordreset = DB::table('password_resets')
+            ->where('email', $request->email)
+            ->first();
+        $inputToken = $request->tokenreset;
+        $storedToken = $passwordreset->token;
+        if (Hash::check($inputToken, $storedToken)){
+            if ($request->newpassword===$request->confirmpassword){
+                User::where('email', $request->email)
+                    ->update(['password' => bcrypt($request->newpassword)]);
+                return redirect()->back()->with('status','Đổi mật khẩu thành công');
+            }
+            return redirect()->back()->with('status','Xác nhận mật khẩu không trùng khớp');
+        }
+        return redirect()->back()->with('status','Yêu cầu này không trùng khớp');
     }
 }
