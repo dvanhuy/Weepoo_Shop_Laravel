@@ -1,3 +1,6 @@
 {
-    "/css/auth.css": "/css/auth.css"
+    "/css/auth.css": "/css/auth.css",
+    "/css/get_list_figure.css": "/css/get_list_figure.css",
+    "/css/get_detail_figure.css": "/css/get_detail_figure.css",
+    "/css/get_list_cart.css": "/css/get_list_cart.css"
 }

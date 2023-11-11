@@ -21,6 +21,6 @@
         <div>Tên của bạn là : {{$name}}</div>
         <div>banner</div>
         <div>demo</div>
-        <a href="{{ route('get_list_figure') }}">Xem danh sách đầy đủ</a>
+        <a href="{{ route('figures.index') }}">Xem danh sách đầy đủ</a>
     </body>
 </html>

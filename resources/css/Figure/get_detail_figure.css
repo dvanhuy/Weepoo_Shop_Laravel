@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 8%;
+}
+nav .logo{
+    font-size: 32px;
+    font-weight: 500;
+    cursor: pointer;
+}
+nav ul li{
+    list-style: none;
+    display: inline-block;
+}
+nav ul li a{
+    display: block;
+    margin: 0 10px;
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 17px;
+    position: relative;
+}
+nav ul li a::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    width: 0;
+    height: 2.5px;
+    transition: all 0.3s ease;
+}
+nav ul li a:hover::before{
+    width: 100%;
+}
+
+a.cart{
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: black;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+a.cart:hover{
+    background-color: rgb(91, 91, 91);
+    color: white;
+}
+
+
+.nav_container{
+    display: flex;
+    align-items: center;
+}
+
+.nav_container div.avatar{
+    width: 40px;
+    height: 40px;
+    margin-left: 60px;
+    overflow: hidden;
+}
+.nav_container div.avatar img{
+    width: 100%;
+    height: 100%;
+}
+.flex-box{
+    display: flex;
+    gap: 70px;
+    width: 80%;
+    margin: 40px auto;
+    align-items: center;
+    justify-content: center;
+}
+.left{
+    width: 400px;
+}
+.big-img{
+    width: 100%;
+    overflow: hidden;
+}
+.big-img img{
+    width: inherit;
+}
+
+.right{
+    max-width: 500px;
+}
+
+.cart-btn{
+    background-color: #ff5e00;
+    margin-right: 20px;
+}
+
+.right .name{
+    font-size: 2rem;
+    font-weight: bold;
+    width: 500px;
+}
+.right .producer{
+    font-size: 1.2rem;
+    color: rgb(80, 80, 80);
+}
+.right .price{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.7rem;
+    color: red;
+}
+.right .size{
+    font-size: 1.1rem;
+}
+.right .size .height,.right .size .area{
+    margin-left: 20px;
+}
+.right .description{
+    margin-top: 10px;
+    font-size: 1.1rem;
+    width: 400px;
+    text-align: justify;
+}
+.add_to_card{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.add_to_card button{
+    font-size: 18px;
+    padding: 8px 25px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+}
+
+.numberproduct{
+    display: flex;
+    gap: 20px;
+    height: 30px;
+    font-size: 1.2rem;
+}
+.numberproduct div{
+    width: 30px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.numberproduct div:hover{
+    background-color: black;
+    color: white;
+}
+
+.numberproduct input{
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid black;
+    width: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.cart-btn:hover{
+    background-color: #ff3c00;
+}
+
+.header_main{
+    padding-left: 30px;
+}
+
+.header_main > a {
+    color: black;
+}
+
+.header_name_title{
+    position: relative;
+    margin-top: 30px;
+    margin-left: 50px;
+    width: 150px;
+    background-color: #86f1ff;
+    margin-bottom: 20px;
+    display: inline-block;
+    height: 40px;
+    box-sizing: border-box;
+    line-height: 40px;
+    cursor: pointer;
+}
+.header_name_titlesub{
+    position: relative;
+    margin-top: 30px;
+    margin-left: 20px;
+    padding-right: 20px ;
+    height: 40px;
+    box-sizing: border-box;
+    background-color: #86f1ff;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    display: inline-block;
+    line-height: 40px;
+    cursor: pointer;
+}
+.header_name_titlesub::after{
+    position: absolute;
+    content: "";
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 100% 50%);
+    background-color: #86f1ff;
+    height: 40px;
+    width: 20px;
+    top: 0px;
+    left: -19px;
+}
+.header_name_title::before,.header_name_titlesub::before{
+    position: absolute;
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-left: 20px solid #86f1ff;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    top: 0px;
+    right: -19px;
+}
+.header_name_title i{
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.numberinfo{
+    display: flex;
+    gap: 40px;
+    margin-top: 5px;
+    color: #2b2b2b;
+}
+
