@@ -59,45 +59,21 @@
             <div>Số tiền</div>
             <div>Thao tác</div>
         </div>
-        <div class="item_figure box_gird">
+        @foreach($carts as $cart)
+        <div class="item_figure box_gird" id="{{ $cart->cart_id }}">
             <div class="info_item">
                 <input type="checkbox" name="" id="">
                 <div class="img_item">
-                    <img src="https://inkythuatso.com/uploads/thumbnails/800/2022/06/hinh-nen-hoat-hinh-3d-cho-dien-thoai-1-inkythuatso-02-13-02-07.jpg" >
+                    <img src="{{ $cart->hinh_anh }}" >
                 </div>
-                <div class="name_item">Loremasdasdaasdasdads adsasd asdasd wdushao asdfhnaospf  adfshapsd ads napidsn aipsdjap dapjso djaopsdj aopds</div>
+                <div class="name_item">{{ $cart->ten }}</div>
             </div>
-            <div>Đơn giá</div>
-            <div>Số lượng</div>
-            <div>tiền</div>
-            <a href=""><div>Xóa</div></a>
-        </div>
-        <div class="item_figure box_gird">
-            <div class="info_item">
-                <input type="checkbox" name="" id="">
-                <div class="img_item">
-                    <img src="https://inkythuatso.com/uploads/thumbnails/800/2022/06/hinh-nen-hoat-hinh-3d-cho-dien-thoai-1-inkythuatso-02-13-02-07.jpg" >
-                </div>
-                <div class="name_item">Loremasdasdaasdasdads adsasd asdasd wdushao asdfhnaospf  adfshapsd ads napidsn aipsdjap dapjso djaopsdj aopds</div>
-            </div>
-            <div>Đơn giá</div>
-            <div>Số lượng</div>
-            <div>tiền</div>
-            <a href=""><div>Xóa</div></a>
-        </div>
-        <div class="item_figure box_gird">
-            <div class="info_item">
-                <input type="checkbox" name="" id="">
-                <div class="img_item">
-                    <img src="https://inkythuatso.com/uploads/thumbnails/800/2022/06/hinh-nen-hoat-hinh-3d-cho-dien-thoai-1-inkythuatso-02-13-02-07.jpg" >
-                </div>
-                <div class="name_item">Loremasdasdaasdasdads adsasd asdasd wdushao asdfhnaospf  adfshapsd ads napidsn aipsdjap dapjso djaopsdj aopds</div>
-            </div>
-            <div>Đơn giá</div>
-            <div>Số lượng</div>
-            <div>tiền</div>
-            <a href=""><div>Xóa</div></a>
-        </div>
+            <div>{{ number_format($cart->gia, 0, ',', '.') }} VNĐ</div>
+            <div>{{ $cart->so_luong }}</div>
+            <div>{{ number_format($cart->gia*$cart->so_luong, 0, ',', '.') }} VNĐ</div>
+            <div class="button_delete" onclick="removeCart('{{ $cart->cart_id }}')">Xóa</div>
+        </div> 
+        @endforeach
     </main> 
     <div class="footer_fixed">
         <div>
@@ -105,5 +81,37 @@
         </div>
         <button>Mua hàng</button>
     </div>
+
+    <script>
+        // href="{{ route('cart.delete',$cart->cart_id) }}
+        function removeCart(cart_id){
+            console.log(cart_id);
+            $.ajax({
+                url: "{{ route('cart.delete', '') }}/" + cart_id,
+                type: "GET",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        // Xử lý thành công
+                        console.log(data.message);
+                        const element = document.getElementById(cart_id);
+                        if (element) {
+                            element.remove();
+                        }
+                    } else {
+                        // Xử lý thất bại
+                        alert(data.message);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError);
+                }
+            });
+        }
+    </script>
+    
 </body>
 </html>

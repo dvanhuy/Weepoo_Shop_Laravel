@@ -11,7 +11,11 @@ class CartController extends Controller
     //
     public function index()
     {
-        return view("Cart.get_list_cart");
+        $carts = Cart::where("id_user", Auth::id())
+            ->join('figures', 'cartstore.id_figure', '=', 'figures.id')
+            ->select('cartstore.id as cart_id', 'cartstore.*', 'figures.*')
+            ->get();
+        return view("Cart.get_list_cart", ["carts"=> $carts]);
     }
     public function add(AddCardRequest $request){
         // Xử lý dữ liệu
@@ -31,6 +35,22 @@ class CartController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Đã tồn tại trong giỏ hàng'
+        ]);
+    }
+    
+    public function delete(Cart $cart_id)
+    {
+        $check = $cart_id->delete();
+        if ($check) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã xóa thành công',
+            ]);
+        }
+        // Trả về kết quả
+        return response()->json([
+            'success' => false,
+            'message' => 'Xóa thất bại'
         ]);
     }
 }
