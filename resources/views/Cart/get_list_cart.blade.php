@@ -10,25 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-    <head>
-        <nav>
-            <div class="logo">Weepoo Shop</div>
-            <div class="nav_container">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Offers</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <a href="{{ route('cart.index') }}" class="cart"><i class="fas fa-shopping-cart"></i></a>
-                </ul>
-                <div class="avatar">
-                    <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="">
-                </div>
-            </div>
-           
-        </nav>
-    </head>
+    @include('header')
 
     <div class="header_main">
         <a href="">

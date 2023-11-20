@@ -60,16 +60,7 @@ class AuthController extends Controller
 
     public function getHomePage()
     {
-        $user = Auth::user();
-        $data = [
-            'id'=> $user->id,
-            'name'=> $user->name,
-            'email'=> $user->email,
-            'avatar' => $user->email_verified_at,
-            'email_verified_at' => $user->email_verified_at,
-        ];
-
-        return view('homepage',$data);
+        return view('homepage');
     }
 
     public function logout()

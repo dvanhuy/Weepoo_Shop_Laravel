@@ -16,3 +16,7 @@ mix.styles([
 mix.styles([
     'resources/css/Cart/get_list_cart.css',
 ],"public/css/get_list_cart.css");
+
+mix.styles([
+    'resources/css/header.css',
+],"public/css/header.css");

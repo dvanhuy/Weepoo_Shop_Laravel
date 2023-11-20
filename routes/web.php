@@ -47,13 +47,13 @@ Route::group(["prefix"=> "api"], function () {
     Route::get('/facebook/callback', [FacebookController::class, 'loginFacebookCallback']);
 });
 
-Route::get('/', [AuthController::class,'getHomePage']);
-Route::get('/homepage', [AuthController::class,'getHomePage'])->name('get_home_page');
-
 Route::group(["prefix"=> "figures"], function () {
     Route::get('', [FigureController::class, 'index'])->name("figures.index");
     Route::get('/{figureID}',[FigureController::class, 'showDetail'])->name('figures.showdetail');
 });
+
+Route::get('/', [AuthController::class,'getHomePage']);
+Route::get('/homepage', [AuthController::class,'getHomePage'])->name('get_home_page');
 
 Route::group(['prefix'=> 'cart'], function () {
     Route::get('', [CartController::class,'index'])->name('cart.index');
