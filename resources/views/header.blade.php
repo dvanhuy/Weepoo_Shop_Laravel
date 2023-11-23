@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/header.css')}}">
-<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<header>
     <nav>
         <div class="logo">Weepoo Shop</div>
         <div class="nav_container">
@@ -18,6 +19,9 @@
                 <ul>
                     @if (Auth::check())
                         <div>Tên : {{ Auth::user()->name }}</div>
+                        @if (Auth::user()->isAdmin())
+                            <a href=""><li>Role Admin</li></a>
+                        @endif
                         <a href=""><li>Cập nhật thông tin</li></a>
                         <a href=" {{ route('logout') }}"><li>Đăng Xuất</li></a>
                     @else
@@ -28,7 +32,7 @@
             </div>
         </div>
     </nav>
-</head>
+</header>
 <script>
     const menuuser = document.querySelector(".menuuser")
     function tooglemenu(){

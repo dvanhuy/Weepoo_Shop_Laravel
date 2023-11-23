@@ -1,0 +1,108 @@
+h1.page_title{
+    background-color: rgb(245, 245, 245);
+    width: 93%;
+    margin: auto;
+    padding: 20px;
+}
+
+.header_name_search{
+    background-color: rgb(245, 245, 245);
+    width: 93%;
+    margin: auto;
+    padding: 20px;
+}
+.header_name_search select{
+    margin-left: 10px;
+    font-size: 0.95rem;
+    padding: 5px;
+}
+
+#search_input_lable{
+    margin-left: 30px;
+}
+
+#search_input{
+    margin-left: 10px;
+    font-size: 0.95rem;
+    padding: 5px;
+}
+#button_search{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+    border: 1px solid black;
+}
+#button_search:hover{
+    background-color: rgb(180, 180, 180);
+}
+
+.container_table{
+    border: 1px solid black;
+    overflow-x  : auto;
+    width: 93%;
+    margin: auto;
+}
+
+.container_table table{
+    border-spacing: 0;
+}
+
+.container_table tr td{
+    min-width: 100px;
+    text-align: center;
+    height: 60px;
+    border-right: 1px solid black;
+    padding: 0px 10px;
+}
+
+.container_table tr td:last-child{
+    border-right: none;
+}
+
+
+.container_table tr th{
+    min-width: 100px;
+    text-align: center;
+    font-size: 1.2rem;
+    height: 60px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0px 10px;  
+}
+
+.container_table tr th:last-child{
+    border-right: none;
+}
+
+
+.container_table table tr > td:first-child,
+.container_table table tr > th:first-child{
+    position: sticky;
+    left: 0;
+    background-color: rgb(110, 255, 158);
+}
+
+.footer_main{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\FacebookController;
 use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\AuthController;
@@ -58,6 +58,13 @@ Route::get('/homepage', [AuthController::class,'getHomePage'])->name('get_home_p
 Route::group(['prefix'=> 'cart'], function () {
     Route::get('', [CartController::class,'index'])->name('cart.index');
     Route::post('add', [CartController::class,'add'])->name('cart.add');
+});
+
+Route::group(['middleware'=>'isAdminRole'],function (){
+    Route::group(['prefix'=> 'manage'], function () {
+        Route::get('figures', [AdminController::class,'getFiguresForm'])->name('manage.get_figures_form');
+        Route::get('users', [AdminController::class,'getUsersForm'])->name('manage.get_users_form');
+    });
 });
 
 Route::group(['middleware'=>'userLogin'],function (){

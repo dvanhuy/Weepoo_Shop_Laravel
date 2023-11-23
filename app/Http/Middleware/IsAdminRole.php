@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserLogin
+class IsAdminRole
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class UserLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
+        if (Auth::user()->isAdmin()) {
             return $next($request);
         }        
         return redirect()->route('get_home_page');

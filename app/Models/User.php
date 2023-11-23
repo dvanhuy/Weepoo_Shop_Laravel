@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'social_id',
         'social_type',
+        'role',
         'avatar',
         'email_verified_at',
     ];
@@ -51,5 +52,9 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token,$this->email));
+    }
+
+    public function isAdmin(){
+        return ($this->role === 'admin');
     }
 }

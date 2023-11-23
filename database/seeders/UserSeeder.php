@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('12345'),
+                'role'=> 'admin',
             ]);
         } catch (\Throwable $th) {
         }
