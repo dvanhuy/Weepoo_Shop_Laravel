@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/manageUsers.css')}}">
     <title>Quản lý người dùng</title>
+    <link rel="stylesheet" href="{{ asset('css/manage_page.css')}}">
 </head>
 <body>
     @include('header')

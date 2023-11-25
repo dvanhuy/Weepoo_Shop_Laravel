@@ -10,7 +10,6 @@
 </head>
 <body>
     @include('header')
-
     <div class="header_main">
         <a href="">
             <div class="header_name_title">
@@ -18,7 +17,7 @@
                 <span>Trang chủ</span> 
             </div>
         </a>
-        <a href="">
+        <a href="{{ route('figures.index') }}">
             <div class="header_name_titlesub">
                 <i class="fa-solid fa-house"></i>
                 <span>Danh sách sản phẩm</span> 
@@ -35,7 +34,11 @@
     <div class="flex-box">
         <div class="left">
             <div class="big-img">
-                <img src="{{ $figure->hinh_anh }}">
+                @if (str_contains($figure->hinh_anh, 'https'))
+                    <img src="{{ $figure->hinh_anh }}" >
+                @else
+                    <img src="{{ asset($figure->hinh_anh) }}" >
+                @endif
             </div>
         </div>
 
@@ -48,14 +51,15 @@
             </div>
             <div class="price">{{ number_format($figure->gia, 0, ',', '.') }} VNĐ</div>
             <div class="size">
-                <div class="size-title">Kích thước :</div>
+                <div class="size-title">Kích thước (cm) :</div>
                 <div class="height">
-                    Cao : {{ $figure->chieu_cao }}
+                    Cao : {{ $figure->chieu_cao }} 
                 </div>
                 <div class="area">
                     Dài × Rộng : {{ $figure->chieu_dai }} × {{ $figure->chieu_rong }}
                 </div>
             </div>
+            <div class="material">Chất liệu : {{ $figure->chat_lieu }}</div>
             <div class="description">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt possimus nihil accusamus tempora harum. Repellendus, culpa dolor neque dicta quos, iusto est ipsam impedit soluta porro, nam possimus unde explicabo.
                 e dicta quos, iusto est ipsam impedit soluta porro, nam possi
@@ -73,6 +77,10 @@
 
 
     <script>
+        function errorImg(event){
+            event.target.src = "{{ asset('images/emptyFigure.webp')}}"
+            console.log("lỗi lấy ảnh");
+        }
         const numberproduct = document.querySelector('.numberinput');
         function minus(){
             numberproduct.value = parseInt(numberproduct.value) - 1;

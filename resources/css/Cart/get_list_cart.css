@@ -31,12 +31,10 @@ main *{
     align-items: center;
 }
 
-.item_figure a{
-    color: #000;
-    text-decoration: none;
-    padding: 10px 20px;
+.item_figure .button_delete{
+    padding: 20px;
 }
-.item_figure a:hover{
+.item_figure .button_delete:hover{
     color: white;
     background-color: red;
 }

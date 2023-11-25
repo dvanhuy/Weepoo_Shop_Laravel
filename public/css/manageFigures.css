@@ -1,12 +1,15 @@
+body{
+    border-top: 1px solid black;
+}
+
 h1.page_title{
-    background-color: rgb(245, 245, 245);
     width: 93%;
     margin: auto;
     padding: 20px;
 }
 
 .header_name_search{
-    background-color: rgb(245, 245, 245);
+    position: relative;
     width: 93%;
     margin: auto;
     padding: 20px;
@@ -37,44 +40,80 @@ h1.page_title{
     background-color: rgb(180, 180, 180);
 }
 
-.container_table{
+.addfigure{
+    padding: 10px 20px;
+    background-color: #a3ffa6;
+    display: inline-block;
+    color: black;
+    font-size: 1.1rem;
     border: 1px solid black;
-    overflow-x  : auto;
-    width: 93%;
-    margin: auto;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.container_table{
+    overflow-x  : visible;
+    padding-left: 4%;
 }
 
 .container_table table{
     border-spacing: 0;
+    border: 1px solid black;
 }
-
-.container_table tr td{
-    min-width: 100px;
-    text-align: center;
-    height: 60px;
-    border-right: 1px solid black;
-    padding: 0px 10px;
-}
-
-.container_table tr td:last-child{
-    border-right: none;
-}
-
 
 .container_table tr th{
     min-width: 100px;
     text-align: center;
     font-size: 1.2rem;
-    height: 60px;
+    height: 80px;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
-    padding: 0px 10px;  
+    padding: 0px 10px;
+}
+
+.container_table tr td{
+    text-align: center;
+    border-right: 1px solid black;
+    border-bottom: 1px solid rgb(124, 124, 124);
+    padding: 10px 10px;
+}
+
+.container_table tr td p{
+    min-width: 100px;
+    max-width: 300px;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.container_table tr td div.action{
+    width: 100px;
+    display: flex;
+    gap: 1px;
+}
+
+.container_table tr td a{
+    text-decoration: none;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid black;
+}
+.container_table tr td a.update{
+    color: black;
+}
+.container_table tr td a.delete{
+    color: red;
 }
 
 .container_table tr th:last-child{
     border-right: none;
 }
-
+.container_table tr td:last-child{
+    border-right: none;
+}
 
 .container_table table tr > td:first-child,
 .container_table table tr > th:first-child{

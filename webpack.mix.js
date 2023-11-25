@@ -8,8 +8,8 @@ mix.styles([
 ],"public/css/header.css");
 
 mix.styles([
-    'resources/css/header.css',
-],"public/css/header.css");
+    'resources/css/Auth/login.css',
+],"public/css/auth.css");
 
 mix.styles([
     'resources/css/Figure/get_list_figure.css',
@@ -22,5 +22,9 @@ mix.styles([
 ],"public/css/get_list_cart.css");
 
 mix.styles([
-    'resources/css/Admin/manageUsers.css',
-],"public/css/manageUsers.css");
+    'resources/css/Admin/manage_page.css',
+],"public/css/manage_page.css");
+
+mix.styles([
+    'resources/css/Figure/add_figure.css',
+],"public/css/add_figure.css");

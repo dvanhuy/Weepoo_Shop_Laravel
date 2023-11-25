@@ -1,0 +1,77 @@
+.flex-box{
+    display: flex;
+    gap: 70px;
+    width: 80%;
+    margin: 40px auto;
+    align-items: center;
+    justify-content: center;
+}
+.left{
+    width: 400px;
+}
+.big-img{
+    width: 100%;
+    overflow: hidden;
+}
+.big-img img{
+    width: inherit;
+}
+
+.right{
+    max-width: 500px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.right input[type='text']{
+    padding: 5px;
+}
+.right label{
+    font-size: 1.05rem;
+}
+
+.right #ten{
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 500px;
+}
+.right #nha_sx{
+    font-size: 1.1rem;
+    color: rgb(80, 80, 80);
+}
+.right #gia{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.7rem;
+    color: red;
+}
+.right textarea#mo_ta{
+    resize: none;
+    height: 130px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.right button.buttonAdd{
+    background-color: rgb(116, 255, 128);
+    height: 50px;
+    border: 1px solid black;
+    font-size: 1.3rem;
+}
+.right .numberinfo input{
+    width: 100px;
+}
+.right .size input{
+    width: 100px;
+    margin-top: 20px;
+}
+.right #chat_lieu{
+    margin-top: 10px;
+    width: 200px;
+    font-size: 17px;
+}
+

@@ -24,7 +24,7 @@
     </form>
     <main>
         <div class="header_main">
-            <a href="">
+            <a href="{{ route('get_home_page') }}">
                 <div class="header_name_title">
                     <i class="fa-solid fa-house"></i>
                     <span>Trang chủ</span> 
@@ -54,7 +54,11 @@
             @foreach($figures as $figure)
             <a class="container_main_item" href="{{ route('figures.showdetail',$figure->id) }}">
                 <div class="item_image">
-                    <img src="{{$figure->hinh_anh}}">
+                    @if (str_contains($figure->hinh_anh, 'http'))
+                        <img src="{{ $figure->hinh_anh }}" >
+                    @else
+                        <img src="{{ asset($figure->hinh_anh) }}" >
+                    @endif
                 </div>
                 <div class="item_name">
                     {{$figure->ten}}
@@ -82,4 +86,10 @@
         </div>
     </main>
 </body>
+<script>
+    function errorImg(event){
+        event.target.src = "{{ asset('images/emptyFigure.webp')}}"
+        console.log("lỗi lấy ảnh");
+    }
+</script>
 </html>

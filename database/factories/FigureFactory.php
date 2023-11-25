@@ -29,7 +29,8 @@ class FigureFactory extends Factory
             'chieu_dai' => fake()->numberBetween(50, 200),
             'chat_lieu' => fake()->randomElement(['Nhựa PVC', 'Nhựa ABS', 'Nhựa Vinly','Nhựa Poly','Gốm','Gỗ','Kim loại']),
             'mo_ta' => fake()->paragraph,
-            'hinh_anh' => fake()->imageUrl()
+            'hinh_anh' => fake()->imageUrl(),
+            // 'hinh_anh' => fake()->image('public/images',640,480,null,false),
         ];
     }
 }

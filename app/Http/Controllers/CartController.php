@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Cart\AddCardRequest;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -37,7 +38,7 @@ class CartController extends Controller
             'message' => 'Đã tồn tại trong giỏ hàng'
         ]);
     }
-    
+
     public function delete(Cart $cart_id)
     {
         $check = $cart_id->delete();

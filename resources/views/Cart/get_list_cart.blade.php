@@ -10,7 +10,6 @@
 </head>
 <body>
     @include('header')
-
     <div class="header_main">
         <a href="">
             <div class="header_name_title">
@@ -92,6 +91,5 @@
             });
         }
     </script>
-    
 </body>
 </html>

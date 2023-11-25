@@ -53,6 +53,10 @@
     width: 400px;
     text-align: justify;
 }
+.right .material{
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
 .add_to_card{
     display: flex;
     gap: 30px;
