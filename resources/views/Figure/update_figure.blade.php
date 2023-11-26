@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cập nhật mô hình</title>
     <link rel="stylesheet" href="{{ asset('css/add_figure.css')}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <style>
         .error{

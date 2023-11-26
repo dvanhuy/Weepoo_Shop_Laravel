@@ -9,5 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {   
-    
+    public function editProfile()
+    {
+        $user = Auth::user();
+        return view("User.edit_profile",["user"=> $user]);
+    }
 }

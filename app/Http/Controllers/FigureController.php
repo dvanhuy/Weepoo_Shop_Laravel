@@ -11,11 +11,38 @@ use Illuminate\Support\Facades\Storage;
 class FigureController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         //30 hàng mới nhất
-        $figure36row = Figure::limit(30)->orderBy("created_at","desc")->get();
-        return view("Figure.get_list",["figures"=>$figure36row]);
+        $order = 'updated_at';
+        $direc =  'desc';
+        if($request->has("order")){
+            //có tham số order -> nhấn vào nút tìm
+            if ($request->input("order") == 'priceasc'){
+                $order = 'gia';
+                $direc =  'asc';
+            } else if ($request->input("order") == "pricedesc"){
+                $order = 'gia';
+                $direc =  'desc';
+            } else {
+                $order = 'updated_at';
+                $direc =  'desc';
+            }
+            if($request->has("search-column") && $request->has("search-column-value")){
+                // có mệnh đề where
+                $figures= Figure::where($request->input("search-column"), 'like', '%'.$request->input("search-column-value").'%')
+                                ->orderBy($order,$direc)
+                                ->paginate(15);
+                return view("Admin.manageFigures",["figures"=> $figures]);
+            } else {
+                // không có mệnh đề where
+                $figures= Figure::orderBy($order,$direc)
+                                ->paginate(15);
+                return view("Admin.manageFigures",["figures"=> $figures]);
+            }
+        }
+        $figures= Figure::orderBy($order,$direc)->paginate(30);
+        return view("Figure.get_list",["figures"=>$figures]);
     }
 
     public function showDetail(Figure $figureID)
@@ -76,6 +103,17 @@ class FigureController extends Controller
         }
         return redirect()->back()->with([
             'status' => 'Cập nhật thất bại'
+        ]);
+    }
+    public function deleteFigure(Figure $figureID){
+        $check = $figureID->delete();
+        if ($check) {
+            return redirect()->back()->with([
+                'status' => 'Đã xóa mô hình thành công'
+            ]);
+        }
+        return redirect()->back()->with([
+            'status' => 'Xóa mô hình thất bại'
         ]);
     }
 }

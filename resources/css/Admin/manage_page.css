@@ -121,27 +121,3 @@ h1.page_title{
     left: 0;
     background-color: rgb(110, 255, 158);
 }
-
-.footer_main{
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}

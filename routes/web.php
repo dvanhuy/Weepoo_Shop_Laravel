@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FigureController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,7 +58,8 @@ Route::get('/', [AuthController::class,'getHomePage']);
 Route::get('/homepage', [AuthController::class,'getHomePage'])->name('get_home_page');
 
 Route::group(['middleware'=>'userLogin'],function (){
-    Route::get('logout', [AuthController::class,'logout'])->name('logout'); 
+    Route::get('logout', [AuthController::class,'logout'])->name('logout');
+    Route::get('users/edit', [UserController::class,'editProfile'])->name('users.get_form_editprofile');
     Route::group(['prefix'=> 'cart'], function () {
         Route::get('', [CartController::class,'index'])->name('cart.index');
         Route::post('add', [CartController::class,'add'])->name('cart.add');
@@ -70,6 +72,7 @@ Route::group(['middleware'=>'userLogin'],function (){
             Route::post('add', [FigureController::class,'addFigure'])->name('figures.add_figure');
             Route::get('update/{figureID}', [FigureController::class,'getFormUpdateFigure'])->name('figures.get_form_update');
             Route::post('update/{figureID}', [FigureController::class,'updateFigure'])->name('figures.update_figure');
+            Route::get('delete/{figureID}', [FigureController::class,'deleteFigure'])->name('figures.delete_figure');
         });
         Route::group(['prefix'=> 'manage/users'], function () {
             Route::get('users', [AdminController::class,'getUsersForm'])->name('manage.get_users_form');

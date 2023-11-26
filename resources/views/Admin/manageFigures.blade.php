@@ -6,27 +6,58 @@
     <title>Quản lý mô hình</title>
     <link rel="stylesheet" href="{{ asset('css/manage_page.css')}}">
 </head>
+<style>
+    .status{
+        color: red;
+        margin-bottom: 10px;
+        font-size: 20px;
+        margin-left: 5%;
+    }
+</style>
 <body>
     @include('header')
-    <h1 class="page_title">Quản lý mô hình</h1>
+    <div class="header_main">
+        <a href="{{ route('get_home_page') }}">
+            <div class="header_name_title">
+                <i class="fa-solid fa-house"></i>
+                <span>Trang chủ</span>
+            </div>
+        </a>
+        <a href="">
+            <div class="header_name_titlesub">
+                <i class="fa-solid fa-house"></i>
+                <span>Quản lý mô hình</span> 
+            </div>
+        </a>
+    </div>
+    @if(Session::has('status'))
+        <div class="status">{{ session('status') }}</div>
+    @endif
     <div class="header_name_search">
         <label for="order">Sắp xếp theo : </label>
         <select name="order" id="order">
-            <option value="">Giá tăng dần</option>
-            <option value="">Giá giảm dần</option>
-            <option value="">Mới cập nhật</option>
-            <option value="">Cũ nhất</option>
+            <option value="recently">Mới cập nhất</option>
+            <option value="priceasc">Giá tăng dần</option>
+            <option value="pricedesc">Giá giảm dần</option>
         </select>
         <label for="search_column" style="margin-left: 30px;">Cột tìm kiếm : </label>
         <select name="columnsearch" id="columnsearch">
-            <option value="">id</option>
-            <option value="">tên</option>
-            <option value="">123123s</option>
-            <option value="">123t</option>
+            <option value="id">ID</option>
+            <option value="ten">Tên</option>
+            <option value="gia">Giá</option>
+            <option value="so_luong_hien_con">Hiện còn</option>
+            <option value="so_luong_da_ban">Đã bán</option>
+            <option value="nha_sx">Nhà sản xuất</option>
+            <option value="chieu_cao">Cao</option>
+            <option value="chieu_rong">Rộng</option>
+            <option value="chieu_dai">Dài</option>
+            <option value="chat_lieu">Chất liệu</option>
+            <option value="mo_ta">Mô tả</option>
+            <option value="chat_lieu">Chất liệu</option>
         </select>
         <label for="search" id="search_input_lable">Tìm kiếm </label>
         <input type="text" name="" id="search_input" placeholder="Thiết bị cần tìm kiếm">
-        <button id="button_search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button id="button_search" onclick="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
         <a href="{{ route('figures.get_form_add') }}"><div class="addfigure">Thêm mô hình</div></a>
     </div>
     <main>
@@ -55,7 +86,7 @@
                     <td >
                         <div class="action">
                             <a href="{{ route('figures.get_form_update',$figure->id) }}" class="update">Sửa</a>
-                            <a href="" class="delete">Xóa</a>
+                            <a href="{{ route('figures.delete_figure',$figure->id) }}" class="delete" onclick="return confirm('Bạn có chắn muốn xóa không?');">Xóa</a>
                         </div>
                     </td>
                     <td><p>{{ $figure->id }}</p></td>
@@ -78,7 +109,7 @@
             </table>
         </div>
     </main>
-    <div class="footer_main">
+    <!-- <div class="footer_main">
         <div class="pagination">
             <a href="#">&laquo;</a>
             <a href="#">1</a>
@@ -88,7 +119,22 @@
             <a href="#">5</a>
             <a href="#">6</a>
             <a href="#">&raquo;</a>
-            </div>
-    </div>
+        </div>
+    </div> -->
+    {{ $figures->appends(request()->except('page'))->links('vendor.pagination.custom_pagination') }}
 </body>
+<script>
+    function search(){
+        const newUrl = new URL(window.location.href)
+        const search_column = document.getElementById('columnsearch').value
+        const search_column_value = document.getElementById('search_input').value
+        const order = document.getElementById('order').value
+        newUrl.searchParams.set('order',order);
+        if(search_column_value){
+            newUrl.searchParams.set('search-column', search_column);
+            newUrl.searchParams.set('search-column-value', search_column_value);
+        }
+        window.location.href=newUrl.href
+    }
+</script>
 </html>

@@ -1,0 +1,54 @@
+.flex-box{
+    display: flex;
+    gap: 70px;
+    width: 80%;
+    margin: 40px auto;
+    align-items: center;
+    justify-content: center;
+}
+.left{
+    width: 350px;
+}
+.big-img{
+    width: 100%;
+    overflow: hidden;
+}
+.big-img img{
+    width: inherit;
+}
+
+.right{
+    max-width: 500px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.right input[type='text']{
+    padding: 10px;
+}
+.right label{
+    font-size: 1.05rem;
+}
+.right #email,.right #name,.right #phone{
+    font-size: 1.3rem;
+    width: 100%;
+}
+
+.right button.buttonupdate{
+    margin-top: 10px;
+    background-color: rgb(116, 255, 128);
+    height: 50px;
+    border: 1px solid black;
+    font-size: 1.3rem;
+}
+.right button.verifiedbutton{
+    margin-bottom: 20px;
+    background-color: rgb(246, 246, 246);
+    border: 1px solid black;
+    font-size: 1.1rem;
+    padding: 10px;
+}

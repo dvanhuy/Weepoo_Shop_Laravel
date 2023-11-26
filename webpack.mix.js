@@ -28,3 +28,7 @@ mix.styles([
 mix.styles([
     'resources/css/Figure/add_figure.css',
 ],"public/css/add_figure.css");
+
+mix.styles([
+    'resources/css/User/edit_profile.css',
+],"public/css/edit_profile.css");

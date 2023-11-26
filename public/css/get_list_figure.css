@@ -6,75 +6,10 @@
 a{
     text-decoration: none;
 }
-header{
-    position: relative;
-    text-align: center;
-}
-header .logo{
-    padding: 20px;
-    position: relative;
-    font-family: 'Varela Round', sans-serif;
-    font-weight: bold;
-    font-size: 2rem;
-}
-
-header .user_avatar{
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border: 1px solid black;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: translateY(-50%);
-}
-.search_box{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    margin: auto;
-    background-color: rgb(244, 244, 244);
-    border-radius: 30px;
-    padding-left: 20px;
-    overflow: hidden;
-}
-
-.search_box input[type=text]{
-    width: 100%;
-    height: 35px;
-    min-width: 300px;
-    outline: none;
-    box-sizing: border-box;
-    border: none;
-    font-size: 20px;
-    padding: 10px 20px;
-    background-color: transparent;
-    font-family: 'Varela Round', sans-serif;
-}
-.search_box input[type=submit]{
-    height: 100%;
-    width: 100px;
-    background-color: transparent;
-    border: none;
-    padding: 15px 10px;
-    font-family: 'Varela Round', sans-serif;
-    border-left: 1px solid rgb(168, 168, 168);
-    font-size: 15px;
-}
-
-.search_box input[type=submit]:hover{
-    background-color: rgb(86, 179, 229);
-    color: white;
-}
 
 main{
     background-color: rgb(244, 244, 244);
     position: relative;
-    margin-top: 20px;
 }
 
 .header_main > a {
@@ -165,30 +100,6 @@ main{
 #button_search:hover{
     background-color: rgb(180, 180, 180);
 }
-
-.footer_main{
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
 
 .container_main{
     padding: 20px;

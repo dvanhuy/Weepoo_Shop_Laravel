@@ -24,7 +24,7 @@
                             <a href="{{ route('manage.get_users_form') }}"><li>Quản lý người dùng</li></a>
                             <a href="{{ route('manage.get_figures_form') }}"><li>Quản lý mô hình</li></a>
                         @endif
-                        <a href=""><li>Cập nhật thông tin</li></a>
+                        <a href=" {{ route('users.get_form_editprofile') }} "><li>Cập nhật thông tin</li></a>
                         <a href=" {{ route('logout') }}"><li>Đăng Xuất</li></a>
                     @else
                         <a href=" {{ route('get_form_login') }} "><li>Đăng nhập</li></a>

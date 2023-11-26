@@ -9,19 +9,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            Weepoo
-        </div>
-        <div class="user_avatar">Avatar</div>
-    </header>
-    <form action="">
-        <div class="search_box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Tìm kiếm trên Weepoo shop">
-            <input type="submit" value="Tìm kiếm">
-        </div>
-    </form>
+    @include('header')
     <main>
         <div class="header_main">
             <a href="{{ route('get_home_page') }}">
@@ -72,18 +60,7 @@
             </a>
             @endforeach
         </div>
-        <div class="footer_main">
-            <div class="pagination">
-                <a href="#">&laquo;</a>
-                <a href="#">1</a>
-                <a class="active" href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">&raquo;</a>
-                </div>
-        </div>
+        {{ $figures->appends(request()->except('page'))->links('vendor.pagination.custom_pagination') }}
     </main>
 </body>
 <script>
