@@ -31,11 +31,14 @@ class CartController extends Controller
                 'message' => 'Đã thêm sản phẩm vào giỏ hàng'
             ]);
         };
-
+        $soluong = $request->input('so_luong');
+        $existsCart[0]->so_luong += (int)$soluong ;
+        $existsCart[0]->save();
         // Trả về kết quả
         return response()->json([
             'success' => false,
-            'message' => 'Đã tồn tại trong giỏ hàng'
+            'message' => 'Đã thêm '.$soluong.' sản phẩm nữa vào giỏ hàng',
+            'data' => $existsCart[0]
         ]);
     }
 

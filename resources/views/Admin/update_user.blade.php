@@ -4,9 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa thông tin cá nhân</title>
+    <title>Chỉnh sửa thông tin người đung</title>
     <link rel="stylesheet" href="{{ asset('css/edit_profile.css')}}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <style>
         .error{
@@ -28,15 +27,22 @@
                 <span>Trang chủ</span>
             </div>
         </a>
+        <a href="{{ route('manage.get_users_form') }}">
+            <div class="header_name_titlesub">
+                <i class="fa-solid fa-house"></i>
+                <span>Quản lý người dùng</span> 
+            </div>
+        </a>
         <a href="">
             <div class="header_name_titlesub">
                 <i class="fa-solid fa-house"></i>
-                <span>Chỉnh sửa trang cá nhân</span> 
+                <span>Cập nhật thông tin</span> 
             </div>
         </a>
+
     </div>
     
-    <form action="{{ route('users.update_profile',$user->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('manage.update_user',$user->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="flex-box">
             <div class="left">
@@ -75,7 +81,6 @@
                 @else
                 <div class="container_verify">
                     <label for="">Email chưa được xác thực</label>
-                    <span class="verifiedbutton" onclick="verify('{{ $user->id }}')">Xác thực</span>
                 </div>
                 @endif
 
@@ -85,7 +90,15 @@
                 @error('phone')
                     <div class="error">{{ $message }}</div>
                 @enderror
-
+                <label for="role">Vai trò:
+                    <select name="role" id="role" style="font-size: 17px; padding: 5px;">
+                        <option value="" selected>Không</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </label>
+                <script>
+                    document.getElementById("role").value = "{{ $user->role }}"
+                </script>
                 <button class="buttonupdate">Cập nhật thông tin</button>
             </div>
         </div>
@@ -98,23 +111,6 @@
         output.onload = function() {
             URL.revokeObjectURL(output.src) // free memory
         }
-    }
-    function verify(userid){
-        $.ajax({
-            url: "{{ route('users.sendmailverify') }}",
-            type: "GET",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                'id_user': userid,
-            },
-            dataType: "json",
-            success: function (data) {
-                alert(data.message)
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log(thrownError);
-            }
-        });
     }
 </script>
 </html>

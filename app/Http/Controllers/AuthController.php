@@ -45,7 +45,8 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $params['namereg'],
             'email' => $params['emailreg'],
-            'password' => $params['passwordreg']
+            'password' => $params['passwordreg'],
+            'avatar' => 'images/avatardefault.png'
         ]);
 
 

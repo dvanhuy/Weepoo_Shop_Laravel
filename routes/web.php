@@ -61,8 +61,10 @@ Route::group(['middleware'=>'userLogin'],function (){
     Route::get('logout', [AuthController::class,'logout'])->name('logout');
     Route::group(['prefix'=> 'users'], function () {
         Route::get('edit', [UserController::class,'getFormEditProfile'])->name('users.get_form_editprofile');
-        Route::get('change-password', [UserController::class,'getFormChangePassword'])->name('users.get_form_changepassword');
+        Route::get('sendmailverify', [UserController::class,'sendmailverify'])->name('users.sendmailverify');
+        Route::get('verify', [UserController::class,'verify'])->name('users.verify');
         Route::post('edit/{userID}', [UserController::class,'updateProfile'])->name('users.update_profile');
+        Route::get('change-password', [UserController::class,'getFormChangePassword'])->name('users.get_form_changepassword');
         Route::post('change-password/{userID}', [UserController::class,'changePassword'])->name('users.change_password');
     });
     Route::group(['prefix'=> 'cart'], function () {
@@ -80,7 +82,10 @@ Route::group(['middleware'=>'userLogin'],function (){
             Route::get('delete/{figureID}', [FigureController::class,'deleteFigure'])->name('figures.delete_figure');
         });
         Route::group(['prefix'=> 'manage/users'], function () {
-            Route::get('users', [AdminController::class,'getUsersForm'])->name('manage.get_users_form');
+            Route::get('', [AdminController::class,'getUsersForm'])->name('manage.get_users_form');
+            Route::get('update/{userID}', [AdminController::class,'getFormUpdateUser'])->name('manage.get_form_update_user');
+            Route::post('update/{userID}', [AdminController::class,'updateUser'])->name('manage.update_user');
+            Route::get('delete/{userID}', [AdminController::class,'deleteUser'])->name('manage.delete_user');
         });
     });
 });

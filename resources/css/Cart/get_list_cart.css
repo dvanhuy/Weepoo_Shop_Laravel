@@ -80,7 +80,7 @@ main *{
     align-items: center;
     justify-content: end;
     padding-right: 30px;
-    gap: 20px;
+    gap: 30px;
 }
 
 .footer_fixed button{
@@ -88,8 +88,37 @@ main *{
     height: 50px;
     background-color: wheat;
     font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
 }
 .footer_fixed > div {
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+/* .number{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.number a{
+    color: black;
+    text-decoration: none;
+}
+
+.number div{
+    border: 1px solid;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.number div:first-child,.number div:last-child{
+    cursor: pointer;
+}
+.number div:first-child:hover,.number div:last-child:hover{
+    background-color: rgb(203, 203, 203);
+} */

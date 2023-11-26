@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <header>
     <nav>
-        <div class="logo">Weepoo Shop</div>
+        <a href="{{ route('get_home_page') }}" style="text-decoration: none; color: black;"><div class="logo">Weepoo Shop</div></a>
         <div class="nav_container">
             <ul>
                 <li><a href="#">Home</a></li>

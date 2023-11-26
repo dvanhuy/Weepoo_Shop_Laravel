@@ -11,13 +11,13 @@
 <body>
     @include('header')
     <div class="header_main">
-        <a href="">
+        <a href="{{ route('get_home_page') }}">
             <div class="header_name_title">
                 <i class="fa-solid fa-house"></i>
                 <span>Trang chủ</span> 
             </div>
         </a>
-        <a href="">
+        <a href="{{ route('figures.index') }}">
             <div class="header_name_titlesub">
                 <i class="fa-solid fa-house"></i>
                 <span>Danh sách sản phẩm</span> 
@@ -26,7 +26,7 @@
         <a href="">
             <div class="header_name_titlesub">
                 <i class="fa-solid fa-house"></i>
-                <span>Chi tiết sản phẩm</span> 
+                <span>Giỏ hàng</span> 
             </div>
         </a>
     </div>
@@ -41,28 +41,31 @@
         </div>
         @foreach($carts as $cart)
         <div class="item_figure box_gird" id="{{ $cart->cart_id }}">
-            <div class="info_item">
-                <input type="checkbox" name="" id="">
-                <div class="img_item">
-                    <img src="{{ $cart->hinh_anh }}" >
+            <a style="color: black; text-decoration: none;" href="{{ route('figures.showdetail',$cart->id_figure) }}">
+                <div class="info_item">
+                    <input type="checkbox" name="" id="">
+                    <div class="img_item">
+                        <img src="{{ $cart->hinh_anh }}" >
+                    </div>
+                    <div class="name_item">{{ $cart->ten }}</div>
                 </div>
-                <div class="name_item">{{ $cart->ten }}</div>
-            </div>
-            <div>{{ number_format($cart->gia, 0, ',', '.') }} VNĐ</div>
-            <div>{{ $cart->so_luong }}</div>
-            <div>{{ number_format($cart->gia*$cart->so_luong, 0, ',', '.') }} VNĐ</div>
+            </a>
+            <div >{{ number_format($cart->gia, 0, ',', '.') }} VNĐ</div>
+            <div >{{ $cart->so_luong }}</div>
+            <div class="price" data-price="{{$cart->gia*$cart->so_luong}}">{{ number_format($cart->gia*$cart->so_luong, 0, ',', '.') }} VNĐ</div>
             <div class="button_delete" onclick="removeCart('{{ $cart->cart_id }}')">Xóa</div>
         </div> 
         @endforeach
     </main> 
     <div class="footer_fixed">
-        <div>
-            Tổng tiền : 123123123 VNĐ
+        <div class="totalprice">
+        0 VNĐ
         </div>
-        <button>Mua hàng</button>
+        <button onclick="pay()">Mua hàng</button>
     </div>
 
     <script>
+        calcTotalPrice()
         function removeCart(cart_id){
             console.log(cart_id);
             $.ajax({
@@ -79,6 +82,7 @@
                         const element = document.getElementById(cart_id);
                         if (element) {
                             element.remove();
+                            calcTotalPrice()
                         }
                     } else {
                         // Xử lý thất bại
@@ -89,6 +93,24 @@
                     console.log(thrownError);
                 }
             });
+        }
+        function calcTotalPrice(){
+            const totalprice = document.getElementsByClassName("totalprice")[0]
+            const item_figure =  document.getElementsByClassName("item_figure")
+            result = 0
+            for (const item of item_figure) {
+                const price = item.getElementsByClassName("price")[0].dataset.price;
+                result+= parseInt(price);
+            }
+            const formatter = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+            });
+            const formattedNumber = formatter.format(result);
+            totalprice.innerHTML = formattedNumber.slice(0,-2)+" VNĐ";
+        }
+        function pay(){
+            alert("Chức năng thanh toán chưa hỗ trợ")
         }
     </script>
 </body>

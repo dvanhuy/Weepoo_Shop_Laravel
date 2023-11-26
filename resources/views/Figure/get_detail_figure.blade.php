@@ -11,7 +11,7 @@
 <body>
     @include('header')
     <div class="header_main">
-        <a href="">
+        <a href="{{ route('get_home_page') }}">
             <div class="header_name_title">
                 <i class="fa-solid fa-house"></i>
                 <span>Trang chủ</span> 
@@ -107,13 +107,14 @@
                     },
                     dataType: "json",
                     success: function (data) {
-                        if (data.success) {
-                            // Xử lý thành công
-                            alert(data.message);
-                        } else {
-                            // Xử lý thất bại
-                            alert(data.message);
-                        }
+                        // if (data.success) {
+                        //     // Xử lý thành công
+                        //     alert(data.message);
+                        // } else {
+                        //     // Xử lý thất bại
+                        //     alert(data.message);
+                        // }
+                        alert(data.message);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         console.log(thrownError);

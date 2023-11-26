@@ -23,7 +23,7 @@
                 <span>Trang chủ</span>
             </div>
         </a>
-        <a href="">
+        <a href="{{ route('manage.get_figures_form') }}">
             <div class="header_name_titlesub">
                 <i class="fa-solid fa-house"></i>
                 <span>Quản lý mô hình</span> 
@@ -79,7 +79,6 @@
                     <th>Hình ảnh</th>
                     <th>Tạo lúc</th>
                     <th>Cập nhật lúc</th>
-                    <th>Xóa lúc</th>
                 </tr>
                 @foreach($figures as $figure)
                 <tr>
@@ -103,7 +102,6 @@
                     <td><p>{{ $figure->hinh_anh }}</p></td>
                     <td><p>{{ $figure->created_at }}</p></td>
                     <td><p>{{ $figure->updated_at }}</p></td>
-                    <td><p>{{ $figure->deleted_at }}</p></td>
                   </tr>
                 @endforeach
             </table>

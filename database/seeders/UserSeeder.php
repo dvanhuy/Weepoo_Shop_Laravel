@@ -27,6 +27,6 @@ class UserSeeder extends Seeder
         } catch (\Throwable $th) {
         }
         
-        User::factory()->count(10)->create();
+        User::factory()->count(100)->create();
     }
 }

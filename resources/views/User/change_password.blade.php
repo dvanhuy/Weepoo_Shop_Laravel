@@ -50,39 +50,40 @@
             </div>
         </form>
     </main>
-</body> 
+</body>
 <style>
-    .container{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        width: 500px;
-        margin: 30px auto;
-    }
-    .container input[type='password']{
-        margin-top: 5px;
-        padding: 10px 20px;
-        box-sizing: border-box;
-        width: 100%;
-        font-size: 20px;
-    }
-    .container label{
-        font-size: 20px;
-    }
-    .buttonconfirm{
-        background-color: #73D691;
-        height: 40px;
-        margin-top: 20px;
-        font-size: 20px;
-    }
-    .error{
-            color: red;
-            font-size: 11px;
-    }
-    .status{
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 500px;
+    margin: 30px auto;
+}
+.container input[type='password']{
+    margin-top: 5px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 20px;
+}
+.container label{
+    font-size: 20px;
+}
+.buttonconfirm{
+    background-color: #73D691;
+    height: 40px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.error{
         color: red;
-        margin-bottom: 10px;
-        font-size: 20px;
-    }
-    </style>
+        font-size: 11px;
+}
+.status{
+    color: red;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+</style>
 </html>

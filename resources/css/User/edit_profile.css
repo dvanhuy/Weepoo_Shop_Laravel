@@ -45,10 +45,16 @@
     border: 1px solid black;
     font-size: 1.3rem;
 }
-.right button.verifiedbutton{
-    margin-bottom: 20px;
+.right .verifiedbutton{
     background-color: rgb(246, 246, 246);
     border: 1px solid black;
     font-size: 1.1rem;
+    text-decoration: none;
+    color: black;
     padding: 10px;
+    cursor: pointer;
+}
+.container_verify{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
