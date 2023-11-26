@@ -34,7 +34,7 @@ class AddFigureRequest extends FormRequest
             "chieu_dai"=> ['nullable',"numeric",'digits_between:1,10'],
             "chat_lieu"=> ['nullable',"max:255"],
             "mo_ta"=> ['nullable'],
-            "hinh_anh"=> ['nullable',"max:255"],
+            "hinh_anh"=> ['nullable'],
         ];
     }
 }

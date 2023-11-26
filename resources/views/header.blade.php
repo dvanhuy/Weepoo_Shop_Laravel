@@ -20,11 +20,11 @@
                     @if (Auth::check())
                         <div>Tên : {{ Auth::user()->name }}</div>
                         @if (Auth::user()->isAdmin())
-                            <a href=""><li>Role Admin</li></a>
                             <a href="{{ route('manage.get_users_form') }}"><li>Quản lý người dùng</li></a>
                             <a href="{{ route('manage.get_figures_form') }}"><li>Quản lý mô hình</li></a>
                         @endif
                         <a href=" {{ route('users.get_form_editprofile') }} "><li>Cập nhật thông tin</li></a>
+                        <a href=" {{ route('users.get_form_changepassword') }} "><li>Đổi mật khẩu</li></a>
                         <a href=" {{ route('logout') }}"><li>Đăng Xuất</li></a>
                     @else
                         <a href=" {{ route('get_form_login') }} "><li>Đăng nhập</li></a>

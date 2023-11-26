@@ -90,11 +90,12 @@ class FigureController extends Controller
             if(File::exists($old_image_path) && $old_image_path != 'images/emptyFigure.webp') {
                 File::delete($old_image_path);
             }
-            $new_image_path = Storage::disk('public')->put("images", $request->file('hinh_anh'));
+            $new_image_path = Storage::disk('public')->put("images/figures", $request->file('hinh_anh'));
             $figure['hinh_anh']='storage/'.$new_image_path;
-        } else {
-            $figure['hinh_anh']='images/emptyFigure.webp';
-        }
+        } 
+        // else {
+        //     $figure['hinh_anh']='images/emptyFigure.webp';
+        // }
         $status = $figureID->update($figure);
         if ($status) {
             return redirect()->back()->with([

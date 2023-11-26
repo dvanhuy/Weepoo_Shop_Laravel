@@ -35,7 +35,7 @@
         </a>
     </div>
     
-    <form action="{{ route('figures.add_figure') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('users.update_profile',$user->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="flex-box">
             <div class="left">
@@ -43,31 +43,46 @@
                     <div class="status">{{ session('status') }}</div>
                 @endif
                 <div class="big-img">
-                    <img id="figure_img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Image_of_none.svg/1200px-Image_of_none.svg.png">
+                    @if (str_contains($user->avatar, 'http'))
+                        <img id="figure_img" src="{{ $user->avatar }}">
+                    @else
+                        <img id="figure_img" src="{{ asset($user->avatar) }}" >
+                    @endif
                 </div>
-                <label>Tệp ảnh của bạn
-                    <input type="file" name="hinh_anh" accept="image/png, image/gif, image/jpeg" onchange="loadFile(event)" />
+                <label for="avatar">Tệp ảnh của bạn
+                    <input type="file" name="avatar" accept="image/png, image/gif, image/jpeg" onchange="loadFile(event)" />
                 </label>
-                @error('hinh_anh')
+                @error('avatar')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="right">
                 <label for="name">Tên tài khoản (*) :
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" value="{{ $user->name }}">
                 </label>
                 <label for="email">Email (*) :
-                    <input type="text" name="email" id="email">
+                    <input type="text" name="email" id="email" disabled value="{{ $user->email }}">
                 </label>
+                <div>
+                @if (isset($user->email_verified_at))
+                <div>
+                    <label for="">Email đã xác thực vào {{$user->email_verified_at}}</label>
+                </div>
+                @else
+                </div>
                 <div>
                     <label for="">Email chưa được xác thực</label>
                     <button class="verifiedbutton">Xác thực</button>
                 </div>
+                @endif
 
-                <label for="phone">Số điện thoại :
-                    <input type="text" name="phone" id="phone">
+                <label for="phone">Số điện thoại : 
+                    <input type="text" name="phone" id="phone" value="{{ $user->phone }}">
                 </label>
+                @error('phone')
+                    <div class="error">{{ $message }}</div>
+                @enderror
 
                 <button class="buttonupdate">Cập nhật thông tin</button>
             </div>
