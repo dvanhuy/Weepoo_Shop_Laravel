@@ -84,7 +84,7 @@
         const numberproduct = document.querySelector('.numberinput');
         function minus(){
             numberproduct.value = parseInt(numberproduct.value) - 1;
-            if(parseInt(numberproduct.value=0)){
+            if(parseInt(numberproduct.value) ==0 ){
                 numberproduct.value = 1
             }
         }

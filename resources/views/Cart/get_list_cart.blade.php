@@ -71,7 +71,7 @@
         <div class="item_figure box_gird {{ $cart->deleted_at ? 'disable_container' : ''  }} {{ $cart->so_luong_hien_con < $cart->so_luong ? 'requireUpdate' : '' }}" id="{{ $cart->cart_id }}">
             <a style="color: black; text-decoration: none;" href="{{ route('figures.showdetail',$cart->id_figure) }}">
                 <div class="info_item">
-                    <input type="checkbox" value="{{ $cart->cart_id }}" data-price="{{$cart->gia*$cart->so_luong}}" onchange="calcprice(event)">
+                    <input type="checkbox" value="{{ $cart->cart_id }}" onchange="calcprice()">
                     <div class="img_item">
                         <img src="{{ $cart->hinh_anh }}" >
                     </div>
@@ -80,12 +80,12 @@
             </a>
             <div >{{ number_format($cart->gia, 0, ',', '.') }} VNĐ</div>
             <div class="number">
-                <div class="buttonupdate" onclick="changeNumberCart('{{ $cart->cart_id }}',-1)">-</div>
-                <div id="so_luong_{{ $cart->cart_id }}">{{ $cart->so_luong }}</div>
-                <div class="buttonupdate" onclick="changeNumberCart('{{ $cart->cart_id }}',1)">+</div>
+                <div class="buttonupdate" onclick="changeNumberCart('{{ $cart->cart_id }}',-1,'{{ $cart->gia }}')">-</div>
+                <div class="get_so_luong" id="so_luong_{{ $cart->cart_id }}">{{ $cart->so_luong }}</div>
+                <div class="buttonupdate" onclick="changeNumberCart('{{ $cart->cart_id }}',1,'{{ $cart->gia }}')">+</div>
                 <span class="so_luong_con">Còn {{ $cart->so_luong_hien_con }} sản phẩm</span>
             </div>
-            <div class="price" >{{ number_format($cart->gia*$cart->so_luong, 0, ',', '.') }} VNĐ</div>
+            <div class="price" data-total="{{ $cart->gia*$cart->so_luong }}" >{{ number_format($cart->gia*$cart->so_luong, 0, ',', '.') }} VNĐ</div>
             <div class="button_delete" onclick="removeCart('{{ $cart->cart_id }}')">Xóa</div>
         </div> 
         @endforeach
@@ -98,7 +98,6 @@
     </div>
 
     <script>
-        let totalmoney = 0;
         function removeCart(cart_id){
             console.log(cart_id);
             $.ajax({
@@ -128,23 +127,27 @@
             });
         }
 
-        function calcprice(e){
-            if (e.target.checked){
-                totalmoney += parseInt(e.target.dataset.price);
-            } else {
-                totalmoney -= parseInt(e.target.dataset.price);
+        function calcprice(){
+            let totalmoney = 0;
+            const figures = document.querySelectorAll('.item_figure')
+            for (const figure of figures) {
+                const checkbox = figure.querySelector(".info_item input[type='checkbox']")
+                const pricexnumber = figure.querySelector(".price")
+                if (checkbox.checked){
+                    totalmoney += parseInt(pricexnumber.dataset.total)
+                }
             }
-            formatTotalPrice();
+            const total_price_element = document.getElementsByClassName("totalprice")[0]
+            total_price_element.innerHTML = formatPrice(totalmoney);
         }
 
-        function formatTotalPrice(){
-            const total_price_element = document.getElementsByClassName("totalprice")[0]
+        function formatPrice(money){
             const formatter = new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',
             });
-            const formattedNumber = formatter.format(totalmoney);
-            total_price_element.innerHTML = formattedNumber.slice(0,-2)+" VNĐ";
+            const formattedNumber = formatter.format(money);
+            return formattedNumber.slice(0,-2)+" VNĐ";
         }
         function pay(){
             const choose_carts = document.querySelectorAll(".info_item input[type='checkbox']")
@@ -166,8 +169,11 @@
             }
         }
 
-        function changeNumberCart(cart_id,number){
+        function changeNumberCart(cart_id,number,gia){
             const updateElement = document.getElementById("so_luong_"+cart_id)
+            if (parseInt(updateElement.innerHTML) + parseInt(number) < 1 ){
+                return
+            }
             $.ajax({
                 url: "{{ route('cart.update') }}",
                 type: "GET",
@@ -180,7 +186,10 @@
                 success: function (data) {
                     if (data.success){
                         updateElement.innerHTML = parseInt(updateElement.innerHTML) + parseInt(number)
-                        console.log(data);
+                        calcmoney = parseInt(updateElement.innerHTML) * parseInt(gia)
+                        updateElement.parentNode.parentNode.querySelector(".price").dataset.total = calcmoney
+                        updateElement.parentNode.parentNode.querySelector(".price").innerHTML = formatPrice(calcmoney)
+                        calcprice()
                     }
                     else{
                         updateElement.innerHTML = data.so_luong_con
@@ -192,7 +201,6 @@
                 }
             });
         }
-
     </script>
 </body>
 </html>

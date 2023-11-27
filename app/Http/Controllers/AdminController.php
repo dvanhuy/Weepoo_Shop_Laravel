@@ -12,34 +12,37 @@ use Illuminate\Support\Facades\Storage;
 class AdminController extends Controller
 {
     public function getFiguresForm(Request $request){
-        $order = 'updated_at';
-        $direc =  'desc';
+        $figures= Figure::getQuery();
+
+        if($request->has("search-column") && $request->has("search-column-value")){
+            // có mệnh đề where
+            $figures =  $figures->where($request->input("search-column"), 'like', '%'.$request->input("search-column-value").'%');
+        }
+
         if($request->has("order")){
             //có tham số order -> nhấn vào nút tìm
-            if ($request->input("order") == 'priceasc'){
-                $order = 'gia';
-                $direc =  'asc';
-            } else if ($request->input("order") == "pricedesc"){
-                $order = 'gia';
-                $direc =  'desc';
-            } else {
-                $order = 'updated_at';
-                $direc =  'desc';
-            }
-            if($request->has("search-column") && $request->has("search-column-value")){
-                // có mệnh đề where
-                $figures= Figure::where($request->input("search-column"), 'like', '%'.$request->input("search-column-value").'%')
-                                ->orderBy($order,$direc)
-                                ->paginate(15);
-                return view("Admin.manageFigures",["figures"=> $figures]);
-            } else {
-                // không có mệnh đề where
-                $figures= Figure::orderBy($order,$direc)
-                                ->paginate(15);
-                return view("Admin.manageFigures",["figures"=> $figures]);
+            switch ($request->input("order")) {
+                case 'priceasc':
+                    $figures = $figures->orderByRaw('gia * 1 asc');
+                    break;
+                case 'pricedesc':
+                    $figures = $figures->orderByRaw('gia * 1 desc');
+                    break;
+                case 'oldest':
+                    $figures = $figures->orderBy('updated_at', 'asc');
+                    break;
+                case 'recently':
+                    $figures = $figures->orderBy('updated_at', 'desc');
+                    break;
+                default:
+                    $figures = $figures->orderBy('updated_at', 'desc');
             }
         }
-        $figures= Figure::orderBy($order,$direc)->paginate(15);
+        else {
+            $figures = $figures->orderBy('updated_at', 'desc');
+        }
+        
+        $figures=$figures->paginate(30);
         return view("Admin.manageFigures",["figures"=> $figures]);
     }
     public function getUsersForm(Request $request){

@@ -28,14 +28,18 @@
             <div class="header_name_search">
                 <label for="order">Sắp xếp theo : </label>
                 <select name="order" id="order">
-                    <option value="">Giá tăng dần</option>
-                    <option value="">Giá giảm dần</option>
-                    <option value="">Mới cập nhật</option>
-                    <option value="">Cũ nhất</option>
+                    <option value="recently">Mới cập nhật</option>
+                    <option value="oldest">Cũ nhất</option>
+                    <option value="pricedesc">Giá giảm dần</option>
+                    <option value="priceasc">Giá tăng dần</option>
+                </select>
+                <label for="search_column" style="margin-left: 30px;">Cột tìm kiếm : </label>
+                <select name="columnsearch" id="columnsearch">
+                    <option value="ten">Tên</option>
                 </select>
                 <label for="search" id="search_input_lable">Tìm kiếm </label>
                 <input type="text" name="" id="search_input" placeholder="Thiết bị cần tìm kiếm">
-                <button id="button_search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button id="button_search" onclick="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
         <div class="container_main">
@@ -55,7 +59,7 @@
                     {{ number_format($figure->gia, 0, ',', '.') }} VNĐ
                 </div>
                 <div class="item_subprice">
-                    {{$figure->created_at}}
+                    {{$figure->updated_at}}
                 </div>
             </a>
             @endforeach
@@ -67,6 +71,18 @@
     function errorImg(event){
         event.target.src = "{{ asset('images/emptyFigure.webp')}}"
         console.log("lỗi lấy ảnh");
+    }
+    function search(){
+        const newUrl = new URL(window.location.href)
+        const search_column = document.getElementById('columnsearch').value
+        const search_column_value = document.getElementById('search_input').value
+        const order = document.getElementById('order').value
+        newUrl.searchParams.set('order',order);
+        if(search_column_value){
+            newUrl.searchParams.set('search-column', search_column);
+            newUrl.searchParams.set('search-column-value', search_column_value);
+        }
+        window.location.href=newUrl.href
     }
 </script>
 </html>

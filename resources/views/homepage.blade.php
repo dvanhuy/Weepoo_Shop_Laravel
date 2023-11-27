@@ -9,16 +9,29 @@
 
 <body>
     @include('header')
-    <form action="">
+    <form action="{{ route('figures.index') }}">
         <div class="search_box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Tìm kiếm trên Weepoo shop">
-            <input type="submit" value="Tìm kiếm">
+            <input type="hidden" name="search-column" value="ten" >
+            <input id="inputsearch" name="search-column-value" type="text" placeholder="Tìm kiếm trên Weepoo shop">
+            <input type="submit" value="Tìm kiếm" onclick="return redirectToList(event)">
         </div>
     </form>
     <h2>homepage</h2>
     <a href="{{ route('figures.index') }}">Xem danh sách đầy đủ</a>
 </body>
+<script>
+    function redirectToList(event){
+        const input = document.getElementById('inputsearch')
+        if (input.value && input.value != ""){
+            return true
+        }
+        else{
+            alert("Chưa nhập giá trị")
+            return false
+        }
+    }
+</script>
 <style>
     body {
         font-family: 'Nunito', sans-serif;
