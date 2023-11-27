@@ -116,5 +116,6 @@ class FigureController extends Controller
         return redirect()->back()->with([
             'status' => 'Xóa mô hình thất bại'
         ]);
+
     }
 }

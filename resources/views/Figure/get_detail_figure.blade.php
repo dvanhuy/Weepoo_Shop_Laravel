@@ -34,7 +34,7 @@
     <div class="flex-box">
         <div class="left">
             <div class="big-img">
-                @if (str_contains($figure->hinh_anh, 'https'))
+                @if (str_contains($figure->hinh_anh, 'http'))
                     <img src="{{ $figure->hinh_anh }}" >
                 @else
                     <img src="{{ asset($figure->hinh_anh) }}" >
@@ -107,13 +107,6 @@
                     },
                     dataType: "json",
                     success: function (data) {
-                        // if (data.success) {
-                        //     // Xử lý thành công
-                        //     alert(data.message);
-                        // } else {
-                        //     // Xử lý thất bại
-                        //     alert(data.message);
-                        // }
                         alert(data.message);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {

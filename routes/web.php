@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\FacebookController;
 use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FigureController;
 use App\Http\Controllers\UserController;
@@ -71,6 +72,13 @@ Route::group(['middleware'=>'userLogin'],function (){
         Route::get('', [CartController::class,'index'])->name('cart.index');
         Route::post('add', [CartController::class,'add'])->name('cart.add');
         Route::get('delete/{cart_id}', [CartController::class,'delete'])->name('cart.delete');
+        Route::get('update', [CartController::class,'update'])->name('cart.update');
+        Route::get('pay', [CartController::class,'getFormPay'])->name('cart.get_form_pay');
+        Route::post('pay', [CartController::class,'pay'])->name('cart.pay');
+    });
+    Route::group(['prefix'=> 'bill'], function () {
+        Route::get('', [BillController::class,'index'])->name('bill.index');
+        Route::get('/{billID}', [BillController::class,'getdetailform'])->name('bill.detail');
     });
     Route::group(['middleware'=>'isAdminRole'],function (){
         Route::group(['prefix'=> 'manage/figures'], function () {
@@ -89,6 +97,3 @@ Route::group(['middleware'=>'userLogin'],function (){
         });
     });
 });
-
-
-
